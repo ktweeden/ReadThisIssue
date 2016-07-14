@@ -23,6 +23,7 @@
   "homepage": "https://github.com/ktweeden/ReadThisIssue#readme",
   "dependencies": {
     "express": "^4.14.0",
+    "mongoose": "^4.5.4",
     "nunjucks": "^2.4.2"
   },
   "devDependencies": {
