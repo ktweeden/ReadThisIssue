@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Read This Issue</title>
+</head>
+<body>
+  <div>
+    Read about the #Guangju Massacre
+  </div>
+  <div>
+    {% for book in allBooks %}
+    <p>
+      {{book.title}}
+    </p>
+    <p>
+      {{book.author}}
+    </p>
+    <p>
+      {{book.summary}}
+    </p>
+    <p>
+      {{book.rating}}
+    </p>
+    {% endfor %}
+  </div>
+</body>
+</html>

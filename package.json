@@ -1,0 +1,34 @@
+{
+  "name": "read_this_issue",
+  "version": "1.0.0",
+  "description": "Recommends books that will inform you about a particular issue or atrocity",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ktweeden/ReadThisIssue.git"
+  },
+  "keywords": [
+    "books",
+    "recommendation",
+    "atrocities"
+  ],
+  "author": "Kate Preston",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ktweeden/ReadThisIssue/issues"
+  },
+  "homepage": "https://github.com/ktweeden/ReadThisIssue#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nunjucks": "^2.4.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
