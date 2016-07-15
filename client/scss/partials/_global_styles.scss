@@ -1,0 +1,41 @@
+@import "_global_variables";
+
+
+.page-title {
+  font-family: $header-font;
+  font-size: $large-header-size;
+  text-align: center;
+  color: $accent-colour;
+  width: 100%;
+}
+
+.button {
+  padding: $small-spacing;
+  background-color: $accent-colour;
+  font-size: $small-header-size;
+  text-align: center;
+  color: $background-colour;
+  border: 0;
+  margin: $small-spacing;
+}
+
+.input-box {
+  padding: $small-spacing;
+  background-color: $primary-colour;
+  font-size: $small-header-size;
+  color: $secondary-colour;
+  border: 0;
+  margin: $small-spacing;
+}
+
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+
+  font-family: $content-font;
+}
