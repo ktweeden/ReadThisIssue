@@ -15,6 +15,21 @@
       <input class="input-box" type="text" name="search" placeholder="Enter a title or ISBN">
       <input class="button" type="submit">
     </form>
+    <div class="results-list">
+      {%for work in listOfWorks %}
+      <div class="work">
+        <div class="book-title">
+          {{work.title}}
+        </div>
+        <div class="author">
+          {{work.author}}
+        </div>
+        <div class="publication-year">
+          {{work.publicationYear}}
+        </div>
+      </div>
+      {%endfor%}
+    </div>
   </div>
 </body>
 </html>

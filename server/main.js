@@ -58,7 +58,9 @@ app.get('/', function (req, res) {
   else {
     console.log (req.query);
     var searchTerm = req.query.search;
-    search.searchGoodreads(searchTerm);
-    res.render(path.join(__dirname, '../client/templates/addBook.njk'));
+    goodreads.searchGoodreads(searchTerm, function(error, listOfWorks){
+      console.log(listOfWorks);
+      res.render(path.join(__dirname, '../client/templates/addBook.njk'), {listOfWorks:listOfWorks});
+    });
   }
 });

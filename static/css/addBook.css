@@ -53,3 +53,34 @@ html, body {
         align-items: center;
     -ms-flex-pack: center;
         justify-content: center; }
+  .wrapper .results-list {
+    -ms-flex-order: 3;
+        order: 3;
+    -ms-flex: 1;
+        flex: 1;
+    max-width: 800px;
+    margin-top: 1rem; }
+    .wrapper .results-list .work {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: row;
+          flex-direction: row;
+      width: 100%;
+      margin: 1.5rem 0; }
+      .wrapper .results-list .work .book-title {
+        -ms-flex-order: 1;
+            order: 1;
+        max-width: 50%;
+        margin-right: 1rem; }
+      .wrapper .results-list .work .author {
+        -ms-flex-order: 2;
+            order: 2;
+        -ms-flex: 1;
+            flex: 1;
+        margin-right: 1rem;
+        text-align: right; }
+      .wrapper .results-list .work .publication-year {
+        -ms-flex-order: 3;
+            order: 3;
+        max-width: 30%;
+        text-align: right; }

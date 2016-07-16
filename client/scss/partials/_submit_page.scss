@@ -16,4 +16,37 @@
       align-items: center;
       justify-content: center;
     }
+
+  .results-list {
+      order: 3;
+      flex: 1;
+      max-width: $max-column-width;
+      margin-top: $medium-spacing;
+
+      .work {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin: $large-spacing 0;
+
+        .book-title {
+          order: 1;
+          max-width: 50%;
+          margin-right: $medium-spacing;
+        }
+
+        .author {
+          order: 2;
+          flex: 1;
+          margin-right: $medium-spacing;
+          text-align: right;
+        }
+
+        .publication-year {
+          order:3;
+          max-width: 30%;
+          text-align: right;
+        }
+    }
+  }
 }
