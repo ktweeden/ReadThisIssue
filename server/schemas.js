@@ -15,7 +15,8 @@ var bookSchema = mongoose.schema({
 
   issues: [{
     description: String,
-    issueId: {type: mongoose.Schema.Types.ObjectId, ref: 'Issue'}
+    issueId: {type: mongoose.Schema.Types.ObjectId, ref: 'Issue'},
+    approved: {type: Boolean, default: false}
   }]
 
 });

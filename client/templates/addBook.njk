@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="/addBook.css">
-  <link href='https://fonts.googleapis.com/css?family=Muli|Roboto+Condensed' rel='stylesheet' type='text/css'>
-  <meta charset="UTF-8">
-  <title>Read This Issue</title>
+  {%include "partials/_global_head.njk"%}
 </head>
 <body>
   <div class="wrapper">
@@ -13,7 +11,7 @@
     </h1>
     <form class="submission" method="get">
       <input class="input-box" type="text" name="search" placeholder="Enter a title or ISBN">
-      <input class="button" type="submit">
+      <input class="large-button" type="submit">
     </form>
     <div class="results-list">
       {%for work in listOfWorks %}
@@ -27,6 +25,9 @@
         <div class="publication-year">
           {{work.publicationYear}}
         </div>
+        <a class="small-button add-book" href="/add/book/{{work.bookID}}">
+          Add
+        </a>
       </div>
       {%endfor%}
     </div>

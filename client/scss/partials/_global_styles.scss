@@ -12,11 +12,21 @@
 .button {
   padding: $small-spacing;
   background-color: $accent-colour;
-  font-size: $small-header-size;
   text-align: center;
   color: $background-colour;
   border: 0;
   margin: $small-spacing;
+  text-decoration: none;
+}
+
+.small-button {
+  @extend .button;
+  font-size: $content-text-size;
+}
+
+.large-button {
+  @extend .button;
+  font-size: $small-header-size;
 }
 
 .input-box {

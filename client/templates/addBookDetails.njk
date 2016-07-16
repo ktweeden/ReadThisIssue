@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/addBookDetails.css">
+  {%include "partials/_global_head.njk"%}
+</head>
+<body>
+  <div class="wrapper">
+    <img class="cover" src="{{book.cover}}">
+    <div class="publication-details">
+      <div class="title">
+        {{book.title}}
+      </div>
+      <div class="author">
+        {{book.author}}
+      </div>
+      <div class="publication-year">
+        {{book.publicationYear}}
+      </div>
+    </div>
+    <div class="description">
+      {{book.description}}
+    </div>
+    <form>
+      <select name="issue-list" class="issue-list">
+        {%for issue in listOfIssues%}
+        <option value={{issue.name}}>{{issue.name}}</option>
+        {%endfor%}
+      </select>
+      <textarea name="issue-description" rows="8" cols="40" placeholder="Describe how this book tackles the issue"></textarea>
+      <input type="button" name="submit" value="submit" class="small-button">
+    </form>
+  </div>
+</body>

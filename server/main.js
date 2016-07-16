@@ -56,11 +56,19 @@ app.get('/', function (req, res) {
     res.render(path.join(__dirname, '../client/templates/addBook.njk'));
   }
   else {
-    console.log (req.query);
+    //console.log (req.query);
     var searchTerm = req.query.search;
     goodreads.searchGoodreads(searchTerm, function(error, listOfWorks){
       console.log(listOfWorks);
       res.render(path.join(__dirname, '../client/templates/addBook.njk'), {listOfWorks:listOfWorks});
     });
   }
+});
+
+//Add book details page
+app.get('/add/book/:workID', function(req, res) {
+  goodreads.getBookByGoodreadsID(req.params.workID, function(error, book){
+    var listOfIssues = [{name:'racism'},{name:'sexism'}]
+    res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {book:book, listOfIssues:listOfIssues});
+  });
 });
