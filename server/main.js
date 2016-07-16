@@ -4,10 +4,13 @@ var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var xml2js = require('xml2js');
+var request = require('request');
+
 
 //local modules
 var cfg = require('../cfg.json');
 var db = require('./db');
+var goodreads = require('./goodreads');
 
 var app = express();
 
@@ -48,13 +51,14 @@ db.initialiseDbConnection(function(){
 
 //Home page request response
 app.get('/', function (req, res) {
-  console.log(req);
   if (!req.query.search) {
     console.log("no search term entered");
     res.render(path.join(__dirname, '../client/templates/addBook.njk'));
   }
   else {
     console.log (req.query);
+    var searchTerm = req.query.search;
+    search.searchGoodreads(searchTerm);
     res.render(path.join(__dirname, '../client/templates/addBook.njk'));
   }
 });
