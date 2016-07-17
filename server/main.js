@@ -68,7 +68,18 @@ app.get('/', function (req, res) {
 //Add book details page
 app.get('/add/book/:workID', function(req, res) {
   goodreads.getBookByGoodreadsID(req.params.workID, function(error, book){
-    var listOfIssues = [{name:'racism'},{name:'sexism'}]
+    var listOfIssues = [{name:'Option One'},{name:'Option Two'}]
     res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {book:book, listOfIssues:listOfIssues});
   });
 });
+
+//Post request from add book details page
+app.post('/add/book/:workID', function(req, res) {
+  console.log(req.body);
+  res.redirect('/');
+});
+
+//Add issue to database page request handler
+app.get('add/issue', function(){
+  res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
+}

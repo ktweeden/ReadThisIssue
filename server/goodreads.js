@@ -94,6 +94,7 @@ var parseBook = function (bookResponse) {
   book.publicationYear = response.work[0].original_publication_year[0]['_'];
   book.description = response.description[0];
   book.cover = response.image_url[0];
+  book.bookID = response.id[0];
   return book;
 }
 

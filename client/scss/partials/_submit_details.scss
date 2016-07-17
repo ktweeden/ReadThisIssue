@@ -41,7 +41,39 @@
     flex: 1;
   }
 
-  .issue-list {
-    width: 40%;
+  .add-book-details-form {
+    order:3;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: $medium-spacing 0;
+
+    .issue-list {
+      order: 1;
+      width: 100%;
+      font-family: $content-font;
+      font-size: $content-text-size;
+      border-radius: 0;
+      margin: 0;
+
+      option {
+        font-family: $content-font;
+        font-size: $content-text-size;
+      }
+    }
+
+    .issue-description {
+      order: 2;
+      width: inherit;
+      resize: none;
+      font-family: $content-font;
+      font-size: $content-text-size;
+      margin-top: $small-spacing;
+    }
+
+    .description-submit-button {
+      order: 3;
+      width: 100%;
+    }
   }
 }
