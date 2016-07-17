@@ -48,7 +48,7 @@ var searchGoodreads = function (bookIdentifyer, onFound) {
  */
 var getBookByGoodreadsID = function (goodreadsBookId, onFound) {
   var searchUrl = "https://www.goodreads.com/book/show/" + goodreadsBookId + ".xml?key=" + cfg.GOODREADS_KEY;
-  console.log("getBookByGoodreadsID.searchUrl="+searchUrl);
+  //console.log("getBookByGoodreadsID.searchUrl="+searchUrl);
 
   //send query to goodreads
   request.get(searchUrl, function (error, response, body){

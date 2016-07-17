@@ -22,9 +22,9 @@
       {{book.description}}
     </div>
     <form class="add-book-details-form" method="post">
-      <select name="issue" class="issue-list">
+      <select name="_id" class="issue-list">
         {%for issue in listOfIssues%}
-        <option value={{issue.name}}>{{issue.name}}</option>
+        <option value="{{issue._id}}">{{issue.title}}</option>
         {%endfor%}
       </select>
       <textarea name="issueDescription" class="issue-description" rows="8" cols="40" placeholder="Describe how this book tackles the issue"></textarea>

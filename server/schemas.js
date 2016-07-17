@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var bookSchema = mongoose.Schema({
   title: String,
   author: {type: mongoose.Schema.Types.ObjectId, ref: 'Author'},
-  goodreadsSynopsis: String,
+  description: String,
   rating: Number,
   publicationYear: Number,
 
@@ -14,6 +14,7 @@ var bookSchema = mongoose.Schema({
   goodreadsURL: String,
 
   issues: [{
+    title: String,
     description: String,
     issueId: {type: mongoose.Schema.Types.ObjectId, ref: 'Issue'},
     approved: {type: Boolean, default: false}
