@@ -11,6 +11,7 @@ var request = require('request');
 var cfg = require('../cfg.json');
 var db = require('./db');
 var goodreads = require('./goodreads');
+var schema = require('./schemas.js')
 
 var app = express();
 
@@ -80,6 +81,24 @@ app.post('/add/book/:workID', function(req, res) {
 });
 
 //Add issue to database page request handler
-app.get('add/issue', function(){
+app.get('/add/issue', function(req, res){
   res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
-}
+});
+
+
+
+app.post('/add/issue', function(req, res) {
+  db.checkIssueExists(req.body.title, function(error, issueExists){
+    console.log(req.body.title);
+    if (issueExists) {
+      console.log('this issue already exists')
+      return res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
+    }
+    db.addIssueToDb(req.body, function (){
+      schema.Issue.find({}, function(error, docs){
+        console.log(docs);
+        res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
+      });
+    });
+  });
+});

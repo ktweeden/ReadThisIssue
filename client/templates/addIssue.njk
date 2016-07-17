@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/addIssue.css">
+  {%include "partials/_global_head.njk"%}
+</head>
+<body>
+  <div class="wrapper">
+    <h1 class="page-title">Submit an Issue</h1>
+    <form class="submit-issue-form" method="post">
+      <input type="text" name="title" placeholder="Issue title" class="issue-title">
+      <textarea name="description" rows="8" cols="40" placeholder="Describe the issue" class="issue-description"></textarea>
+      <input type="submit" name="submit" value="Submit" class="small-button issue-submit">
+    </form>
+  </div>
+</body>
+</html>

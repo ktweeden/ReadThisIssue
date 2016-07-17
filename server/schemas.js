@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var bookSchema = mongoose.schema({
+var bookSchema = mongoose.Schema({
   title: String,
   author: {type: mongoose.Schema.Types.ObjectId, ref: 'Author'},
   goodreadsSynopsis: String,
@@ -21,13 +21,13 @@ var bookSchema = mongoose.schema({
 
 });
 
-var issueSchema = mongoose.schema({
-  title: String,
+var issueSchema = mongoose.Schema({
+  title: {type: String, unique: true},
   description: String,
   relatedTags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Issue'}]
 });
 
-var authorSchema = mongoose.schema({
+var authorSchema = mongoose.Schema({
   name: String
 });
 
@@ -35,3 +35,9 @@ var authorSchema = mongoose.schema({
 var Book = mongoose.model('Book', bookSchema);
 var Issue = mongoose.model('Issue', issueSchema);
 var Author = mongoose.model('Author', authorSchema);
+
+module.exports = {
+  Book:Book,
+  Issue:Issue,
+  Author:Author
+}
