@@ -1,5 +1,4 @@
 
-
 /**
  * Tests input contains only valid characters TODO move to input utils file
  */
