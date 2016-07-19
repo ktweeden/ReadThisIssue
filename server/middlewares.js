@@ -1,5 +1,20 @@
-//All http request handlers - export function that takes app and binds middlewares to it
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var xml2js = require('xml2js');
+var request = require('request');
+var express = require('express');
+var path = require('path');
 
+//local modules
+var cfg = require('../cfg.json');
+var db = require('./db');
+var goodreads = require('./goodreads');
+var schema = require('./schemas.js');
+var issue = require('./issue.js');
+var book = require('./book.js');
+
+
+//All http request handlers - export function that takes app and binds middlewares to it
 function bindMiddlewares(app){
 
   //body parser config
@@ -29,17 +44,11 @@ function bindMiddlewares(app){
   //Add book details page
   app.get('/add/book/:workID', function(req, res) {
     goodreads.getBookByGoodreadsID(req.params.workID, function(error, book){
-      schema.Issue.find({}, function(error, docs){
+      issue.Issue.find({}, function(error, docs){
         res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {book:book, listOfIssues:docs});
       });
     });
   });
-
-  //Post request from add book details page
-  //app.post('/add/book/:workID', function(req, res) {
-    //console.log(req.body);
-  //  res.redirect('/');
-  //});
 
   //Get page for issue submision
   app.get('/add/issue', function(req, res){
@@ -49,14 +58,14 @@ function bindMiddlewares(app){
 
   //Add submitted issue to database
   app.post('/add/issue', function(req, res) {
-    db.checkIssueExists(req.body.title, function(error, issueExists){
+    issue.checkExists(req.body.title, function(error, issueExists){
       console.log(req.body.title);
       if (issueExists) {
         console.log('this issue already exists');
         return res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
       }
-      db.addIssueToDb(req.body, function (error, issue){
-        schema.Issue.find({}, function(error, docs){
+      issue.addToDb(req.body, function (error, newIssue){
+        issue.Issue.find({}, function(error, docs){
           console.log(docs);
           res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
         });
@@ -67,7 +76,7 @@ function bindMiddlewares(app){
   //Add submitted book to database
   app.post('/add/book/:bookID', function(req, res) {
     console.log('this is the req.body', req.body);
-    db.checkBookExists(req.body.bookID, function(error, bookExists){
+    book.checkExists(req.body.bookID, function(error, bookExists){
       if(bookExists) {
         console.log('this book exists - write a function to check if issue exists');
         return res.render(path.join(__dirname, '../client/templates/addBook.njk'));
@@ -75,7 +84,7 @@ function bindMiddlewares(app){
       console.log('book ID is' + req.body.bookID);
       goodreads.getBookByGoodreadsID(req.body.bookID, function(error, bookObject){
         console.log('error is' + error);
-        schema.Issue.findById(req.body._id, function(error, issue){
+        issue.Issue.findById(req.body._id, function(error, issue){
           console.log('the book is ' + bookObject);
           var newIssue = {
             title: issue.title,
@@ -88,7 +97,7 @@ function bindMiddlewares(app){
           else {
             bookObject.issues.push(newIssue);
           }
-          db.addBookToDb(bookObject, function(error, book){
+          book.addToDb(bookObject, function(error, book){
             console.log(JSON.stringify(book) + ' has been added to the database');
             return res.redirect('/');
           });
@@ -96,6 +105,7 @@ function bindMiddlewares(app){
       });
     });
   });
+
 };
 
 module.exports = {

@@ -14,7 +14,7 @@ var Issue = mongoose.model('Issue', issueSchema);
  */
 var checkIssueExists = function(issueTitle, onCheck) {
   console.log('checking ' + issueTitle);
-  schema.Issue.find({title:issueTitle}, function (error, docs) {
+  Issue.find({title:issueTitle}, function (error, docs) {
     console.log(docs);
     if (error){
       onCheck(error);
@@ -32,7 +32,7 @@ var checkIssueExists = function(issueTitle, onCheck) {
  * Adds issue to the database
  */
 var addIssueToDb = function (issueObject, onSave) {
-  var issue = new schema.Issue({title: issueObject.title, description:issueObject.description, relatedTags: issueObject.relatedTags});
+  var issue = new Issue({title: issueObject.title, description:issueObject.description, relatedTags: issueObject.relatedTags});
   issue.save(function (error, issue, numAffected) {
     if (error) {
       onSave(error);
@@ -43,6 +43,6 @@ var addIssueToDb = function (issueObject, onSave) {
 
 module.exports = {
     Issue:Issue,
-    checkIssueExists: checkIssueExists,
-    addIssueToDb: addIssueToDb,
+    checkExists: checkIssueExists,
+    addToDb: addIssueToDb,
 }

@@ -1,22 +1,11 @@
 var express = require('express');
 var nunjucks  = require('nunjucks');
 var path = require('path');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var xml2js = require('xml2js');
-var request = require('request');
-
-
-//local modules
-var cfg = require('../cfg.json');
+var middlewares = require('./middlewares.js');
 var db = require('./db');
-var goodreads = require('./goodreads');
-var schema = require('./schemas.js')
+
 
 var app = express();
-
-
-//CONFIGS
 
 //nunjucks config
 nunjucks.configure((path.join(__dirname, '../client/templates')), {
@@ -31,3 +20,6 @@ db.initialiseDbConnection(function(){
     console.log('Read This Issue listening on port 9000');
   });
 });
+
+//Binds app to middlewares
+middlewares.bind(app);

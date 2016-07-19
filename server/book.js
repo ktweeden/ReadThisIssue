@@ -30,7 +30,7 @@ var Book = mongoose.model('Book', bookSchema);
  */
 var checkBookExists = function(goodreadsId, onCheck) {
   console.log('checking ' + goodreadsId);
-  schema.Book.find({goodreadsId:goodreadsId}, function (error, docs) {
+  Book.find({goodreadsId:goodreadsId}, function (error, docs) {
     console.log(docs);
     if (error){
       onCheck(error);
@@ -48,7 +48,7 @@ var checkBookExists = function(goodreadsId, onCheck) {
  * Adds book to the database
  */
 var addBookToDb = function (bookObject, onSave) {
-  var book = new schema.Book({
+  var book = new Book({
     title: bookObject.title,
     author:bookObject.author,
     publicationYear: bookObject.publicationYear,
@@ -71,6 +71,6 @@ var addBookToDb = function (bookObject, onSave) {
 
 module.exports = {
     Book:Book,
-    addBookToDb: addBookToDb,
-    checkBookExists: checkBookExists
+    addToDb: addBookToDb,
+    checkExists: checkBookExists
 }
