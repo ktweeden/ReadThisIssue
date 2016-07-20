@@ -29,7 +29,7 @@ var checkIssueExists = function(issueTitle, onCheck) {
 }
 
 /**
- * Adds issue to the database
+ * Adds issue to the database. Passes issue object to callback.
  */
 var addIssueToDb = function (issueObject, onSave) {
   var issue = new Issue({title: issueObject.title, description:issueObject.description, relatedTags: issueObject.relatedTags});

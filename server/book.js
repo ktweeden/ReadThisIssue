@@ -45,7 +45,18 @@ var checkBookExists = function(goodreadsId, onCheck) {
 }
 
 /**
- * Adds book to the database
+ * Adds book to the database.
+ * Passes book object with following fields to callback function:
+ *  - title
+ *  - author
+ *  - publicationYear
+ *  - description
+ *  - rating (flot between 1 and 5)
+ *  - isbn (10 or 13)
+ *  - imageURL (link to book cover image on goodreads)
+ *  - goodreadsURL (link to goodreads page)
+ *  - issues (object containing ref to issue, title, and description)
+ *  - goodreadsID (ref to goodreads database)
  */
 var addBookToDb = function (bookObject, onSave) {
   var book = new Book({
@@ -54,7 +65,6 @@ var addBookToDb = function (bookObject, onSave) {
     publicationYear: bookObject.publicationYear,
     description: bookObject.description,
     rating: bookObject.rating,
-    goodreadsId: bookObject.rating,
     isbn: bookObject.isbn,
     imageURL: bookObject.imageURL,
     goodreadsURL: bookObject.goodreadsURL,

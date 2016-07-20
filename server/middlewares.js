@@ -14,7 +14,9 @@ var issue = require('./issue.js');
 var book = require('./book.js');
 
 
-//All http request handlers - export function that takes app and binds middlewares to it
+/**
+ * All http request handlers - export function that takes app and binds middlewares to it
+ */
 function bindMiddlewares(app){
 
   //body parser config
@@ -55,8 +57,7 @@ function bindMiddlewares(app){
     res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
   });
 
-
-  //Add submitted issue to database
+  // Add submitted issue to database
   app.post('/add/issue', function(req, res) {
     issue.checkExists(req.body.title, function(error, issueExists){
       console.log(req.body.title);
@@ -78,12 +79,14 @@ function bindMiddlewares(app){
     console.log('this is the req.body', req.body);
     book.checkExists(req.body.bookID, function(error, bookExists){
       if(bookExists) {
+        //TODO check if the issue being submitted is attached to existing book.
         console.log('this book exists - write a function to check if issue exists');
         return res.render(path.join(__dirname, '../client/templates/addBook.njk'));
       }
-      console.log('book ID is' + req.body.bookID);
+      //If book isn't already in the database, retrieve info from goodreads
       goodreads.getBookByGoodreadsID(req.body.bookID, function(error, bookObject){
-        console.log('error is' + error);
+
+        //Creates object to be added to Book's 'issues' field
         issue.Issue.findById(req.body._id, function(error, issue){
           console.log('the book is ' + bookObject);
           var newIssue = {
@@ -97,6 +100,8 @@ function bindMiddlewares(app){
           else {
             bookObject.issues.push(newIssue);
           }
+
+          //adds new book, including issue and description, to database
           book.addToDb(bookObject, function(error, book){
             console.log(JSON.stringify(book) + ' has been added to the database');
             return res.redirect('/');

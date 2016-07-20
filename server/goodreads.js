@@ -7,7 +7,7 @@ var inputValidation = require('./utils/input_validation');
 var error = {};
 
 /**
- * Searches goodreads database for a book given title or ISBN.
+ * Searches goodreads database for a book given title or ISBN. Passes array of works found to callback.
  */
 var searchGoodreads = function (bookIdentifyer, onFound) {
 
