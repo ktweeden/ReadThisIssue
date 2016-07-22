@@ -1,29 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Read This Issue</title>
   {%include "partials/_global_head.njk"%}
+  <link rel="stylesheet" href="/home.css">
 </head>
 <body>
-  <div>
-    Read about the #Guangju Massacre
-  </div>
-  <div>
-    {% for book in allBooks %}
-    <p>
-      {{book.title}}
-    </p>
-    <p>
-      {{book.author}}
-    </p>
-    <p>
-      {{book.summary}}
-    </p>
-    <p>
-      {{book.rating}}
-    </p>
-    {% endfor %}
+  <div class="wrapper">
+  {%include "partials/_nav_bar.njk"%}
   </div>
 </body>
 </html>

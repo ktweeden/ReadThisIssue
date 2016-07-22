@@ -29,16 +29,19 @@ function bindMiddlewares(app){
 
   //Home page request response
   app.get('/', function (req, res) {
+      res.render(path.join(__dirname, '../client/templates/home.njk'), {navigation:navigation});
+  });
+
+
+  //Add book page request response
+  app.get('/add/book', function (req, res) {
     if (!req.query.search) {
-      //console.log("no search term entered");
-      res.render(path.join(__dirname, '../client/templates/addBook.njk'));
+      res.render(path.join(__dirname, '../client/templates/addBook.njk'), {navigation:navigation});
     }
     else {
-      //console.log (req.query);
       var searchTerm = req.query.search;
       goodreads.searchGoodreads(searchTerm, function(error, listOfWorks){
-        //console.log(listOfWorks);
-        res.render(path.join(__dirname, '../client/templates/addBook.njk'), {listOfWorks:listOfWorks});
+        res.render(path.join(__dirname, '../client/templates/addBook.njk'), {navigation:navigation, listOfWorks:listOfWorks});
       });
     }
   });
@@ -47,14 +50,14 @@ function bindMiddlewares(app){
   app.get('/add/book/:workID', function(req, res) {
     goodreads.getBookByGoodreadsID(req.params.workID, function(error, book){
       issue.Issue.find({}, function(error, docs){
-        res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {book:book, listOfIssues:docs});
+        res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {navigation:navigation, book:book, listOfIssues:docs});
       });
     });
   });
 
   //Get page for issue submision
   app.get('/add/issue', function(req, res){
-    res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
+    res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {navigation:navigation});
   });
 
   // Add submitted issue to database
@@ -63,12 +66,12 @@ function bindMiddlewares(app){
       console.log(req.body.title);
       if (issueExists) {
         console.log('this issue already exists');
-        return res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
+        return res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {navigation:navigation});
       }
       issue.addToDb(req.body, function (error, newIssue){
         issue.Issue.find({}, function(error, docs){
           console.log(docs);
-          res.render(path.join(__dirname, '../client/templates/addIssue.njk'));
+          res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {navigation:navigation});
         });
       });
     });
@@ -81,7 +84,7 @@ function bindMiddlewares(app){
       if(bookExists) {
         //TODO check if the issue being submitted is attached to existing book.
         console.log('this book exists - write a function to check if issue exists');
-        return res.render(path.join(__dirname, '../client/templates/addBook.njk'));
+        return res.render(path.join(__dirname, '../client/templates/addBook.njk'), {navigation:navigation});
       }
       //If book isn't already in the database, retrieve info from goodreads
       goodreads.getBookByGoodreadsID(req.body.bookID, function(error, bookObject){
@@ -112,6 +115,22 @@ function bindMiddlewares(app){
   });
 
 };
+
+//Nav object
+var navigation = [
+  {
+    title: 'Home',
+    URL: '/'
+  },
+  {
+    title: 'Add book',
+    URL: '/add/book'
+  },
+  {
+    title: 'Add issue',
+    URL: '/add/issue'
+  }
+];
 
 module.exports = {
   bind:bindMiddlewares

@@ -37,41 +37,6 @@ html, body {
   height: 100%;
   font-family: "Muli", sans-serif; }
 
-.wrapper {
-  display: -ms-flexbox;
-  display: flex;
-  max-width: 800px;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-align: center;
-      align-items: center;
-  margin: 0 auto; }
-  .wrapper .submit-issue-form {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    width: 100%;
-    margin: 1rem 0; }
-  .wrapper .issue-title {
-    -ms-flex-order: 1;
-        order: 1;
-    font-size: 1.1rem;
-    font-family: "Muli", sans-serif;
-    width: 100%; }
-  .wrapper .issue-description {
-    -ms-flex-order: 2;
-        order: 2;
-    width: 100%;
-    resize: none;
-    font-family: "Muli", sans-serif;
-    font-size: 1.1rem;
-    margin-top: 0.5rem; }
-  .wrapper .issue-submit {
-    -ms-flex-order: 3;
-        order: 3;
-    width: 100%; }
-
 .nav-bar-wrapper {
   position: fixed;
   top: 0px;

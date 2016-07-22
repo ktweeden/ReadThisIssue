@@ -1,0 +1,12 @@
+<div class="nav-bar-wrapper">
+  <a class="site-title" href="/">
+    Read this issue
+  </a>
+  <div class="nav-item-wrapper">
+  {% for item in navigation%}
+  <a class="nav-item" href="{{item.URL}}">
+    {{item.title}}
+  </a>
+  {%endfor%}
+  </div>
+</div>

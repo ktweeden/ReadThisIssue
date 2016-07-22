@@ -1,0 +1,34 @@
+.nav-bar-wrapper {
+  position: fixed;
+  top: 0px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: $primary-colour;
+
+  .site-title {
+    color: $accent-colour;
+    text-align: left;
+    font-size: $medium-header-size;
+    font-family: $header-font;
+    margin-left: $small-spacing;
+    text-decoration: none;
+  }
+
+  .nav-item-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: $small-spacing;
+
+    .nav-item {
+      color: $secondary-colour;
+      text-align: right;
+      align-self: flex-end;
+      font-size: $small-header-size;
+      margin-left: $small-spacing;
+      text-decoration: none;
+    }
+
+  }
+
+}

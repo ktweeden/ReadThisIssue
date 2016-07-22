@@ -3,7 +3,8 @@
   font-size: 3.5rem;
   text-align: center;
   color: #0E7C7B;
-  width: 100%; }
+  width: 100%;
+  margin-top: 3.75rem; }
 
 .button, .small-button, .large-button {
   padding: 0.5rem;
@@ -110,3 +111,34 @@ html, body {
       -ms-flex-order: 3;
           order: 3;
       width: 100%; }
+
+.nav-bar-wrapper {
+  position: fixed;
+  top: 0px;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  background-color: #C0D6DF; }
+  .nav-bar-wrapper .site-title {
+    color: #0E7C7B;
+    text-align: left;
+    font-size: 2.5rem;
+    font-family: "Roboto Condensed", sans-serif;
+    margin-left: 0.5rem;
+    text-decoration: none; }
+  .nav-bar-wrapper .nav-item-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
+    margin-right: 0.5rem; }
+    .nav-bar-wrapper .nav-item-wrapper .nav-item {
+      color: #4F6D7A;
+      text-align: right;
+      -ms-flex-item-align: end;
+          align-self: flex-end;
+      font-size: 1.5rem;
+      margin-left: 0.5rem;
+      text-decoration: none; }
