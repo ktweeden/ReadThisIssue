@@ -14,7 +14,7 @@
   -ms-flex-item-align: center;
       align-self: center;
   text-align: center;
-  color: #0E7C7B;
+  color: #003459;
   margin: 1rem; }
 
 .button {
@@ -62,7 +62,7 @@ h3 {
     margin-left: 1rem;
     margin-top: 0.5rem;
     text-align: left;
-    color: #0E7C7B; }
+    color: #003459; }
   .nav-wrapper .nav-list {
     -ms-flex-order: 2;
         order: 2;
@@ -84,58 +84,75 @@ h3 {
   width: 100%;
   display: -ms-flexbox;
   display: flex;
-  margin: 0 1rem; }
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-direction: row;
+      flex-direction: row; }
   .features-issues-wrapper .featured-issue {
-    -ms-flex: 1;
-        flex: 1;
-    min-width: 30%;
+    min-width: 50%;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
         flex-direction: column;
-    margin: 0 1rem; }
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    .features-issues-wrapper .featured-issue.issue-1 {
+      background-color: rgba(0, 23, 31, 0.7); }
+    .features-issues-wrapper .featured-issue.issue-2 {
+      background-color: rgba(0, 23, 31, 0.77); }
+    .features-issues-wrapper .featured-issue.issue-3 {
+      background-color: rgba(0, 23, 31, 0.8); }
     .features-issues-wrapper .featured-issue .issue-title {
       -ms-flex-order: 1;
           order: 1;
       width: 100%;
-      text-align: center;
-      color: #4F6D7A;
-      padding: 0.5rem 0;
-      border: 1px solid #4F6D7A; }
+      text-align: left;
+      padding: 0.5rem 1rem;
+      box-sizing: border-box; }
     .features-issues-wrapper .featured-issue .list-of-books {
       -ms-flex-order: 2;
           order: 2;
-      -ms-flex: 1;
-          flex: 1;
-      -ms-flex-direction: column;
-          flex-direction: column;
-      margin-top: 1rem; }
-      .features-issues-wrapper .featured-issue .list-of-books .book {
-        width: 100%;
+      -ms-flex-direction: row;
+          flex-direction: row;
+      margin-top: 1rem;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+      width: 100%; }
+      .features-issues-wrapper .featured-issue .list-of-books .book-cover {
+        width: 30%;
+        height: 40vh;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        display: inline-block; }
+      .features-issues-wrapper .featured-issue .list-of-books h3 {
+        -ms-flex: 1;
+            flex: 1;
         display: -ms-flexbox;
         display: flex;
-        -ms-flex-direction: row;
-            flex-direction: row;
-        margin: 1rem 0; }
-        .features-issues-wrapper .featured-issue .list-of-books .book .book-cover {
-          width: 30%;
-          height: 25vh;
-          background-repeat: no-repeat;
-          background-size: contain; }
-        .features-issues-wrapper .featured-issue .list-of-books .book h3 {
-          -ms-flex: 1;
-              flex: 1;
-          display: -ms-flexbox;
-          display: flex;
-          -ms-flex-direction: column;
-              flex-direction: column;
-          -ms-flex-line-pack: center;
-              align-content: center;
-          -ms-flex-pack: center;
-              justify-content: center;
-          text-align: center; }
+        -ms-flex-direction: column;
+            flex-direction: column;
+        -ms-flex-line-pack: center;
+            align-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+        text-align: center; }
     .features-issues-wrapper .featured-issue .see-more {
       -ms-flex-order: 3;
           order: 3;
       font-weight: 300;
-      font-style: "Roboto Condensed", sans-serif; }
+      font-style: "Roboto Condensed", sans-serif;
+      font-size: 1.5rem;
+      text-align: right;
+      margin: 1rem; }
+  .features-issues-wrapper .title-box {
+    min-width: 50%;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: rgba(0, 23, 31, 0.74);
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    color: #003459;
+    font-size: 3.5rem; }

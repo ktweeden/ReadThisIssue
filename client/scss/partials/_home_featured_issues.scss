@@ -2,41 +2,49 @@
   order: 2;
   width: 100%;
   display: flex;
-  margin: 0 $medium-spacing;
+  flex-wrap: wrap;
+  flex-direction: row;
 
   .featured-issue {
-    flex: 1;
-    min-width: 30%;
+    min-width: 50%;
     display: flex;
     flex-direction: column;
-    margin: 0 $medium-spacing;
+    flex-wrap: wrap;
+
+    &.issue-1 {
+      background-color: rgba(0, 23, 31, 0.7);
+    }
+
+    &.issue-2 {
+      background-color: rgba(0, 23, 31, 0.77);
+    }
+
+    &.issue-3 {
+      background-color: rgba(0, 23, 31, 0.8);
+    }
 
     .issue-title {
       order: 1;
       width: 100%;
-      text-align: center;
-      color: $secondary-colour;
-      padding: $small-spacing 0;
-      border: 1px solid $secondary-colour;
+      text-align: left;
+      padding: $small-spacing $medium-spacing;
+      box-sizing: border-box;
     }
 
     .list-of-books{
       order: 2;
-      flex: 1;
-      flex-direction: column;
+      flex-direction: row;
       margin-top: $medium-spacing;
-
-      .book {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        margin: $medium-spacing 0;
+      flex-wrap: nowrap;
+      width: 100%;
 
         .book-cover {
           width: 30%;
-          height: 25vh;
+          height: 40vh;
           background-repeat: no-repeat;
           background-size: contain;
+          background-position: center;
+          display: inline-block;
         }
 
         h3 {
@@ -47,12 +55,24 @@
           justify-content: center;
           text-align: center;
         }
-      }
     }
     .see-more {
       order: 3;
       font-weight: 300;
       font-style: $header-font;
+      font-size: $small-header-size;
+      text-align: right;
+      margin: $medium-spacing;
     }
+  }
+
+  .title-box {
+    min-width: 50%;
+    display: flex;
+    background-color:rgba(0, 23, 31, 0.74);
+    justify-content: center;
+    align-items: center;
+    color: $primary-colour;
+    font-size: $large-header-size
   }
 }

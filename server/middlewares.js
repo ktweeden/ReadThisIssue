@@ -33,12 +33,12 @@ function bindMiddlewares(app){
       title:'Environment',
       bookList: [
         {
-          title: 'book1',
+          title: 'The sixth extinction',
           url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
         },
         {
           title: 'book2',
-          url: 'https://d.gr-assets.com/books/1449830757l/28172483.jpg'
+          url: 'https://d.gr-assets.com/books/1391384454l/18079683.jpg'
         },
         {
           title: 'book3',
@@ -52,15 +52,15 @@ function bindMiddlewares(app){
       bookList: [
         {
           title: 'book1',
-          url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
+          url: 'https://d.gr-assets.com/books/1356654499l/15796700.jpg'
         },
         {
           title: 'book2',
-          url: 'https://d.gr-assets.com/books/1449830757l/28172483.jpg'
+          url: 'https://d.gr-assets.com/books/1439328100l/25489025.jpg'
         },
         {
           title: 'book3',
-          url: 'https://d.gr-assets.com/books/1388690343l/17160008.jpg'
+          url: 'https://d.gr-assets.com/books/1400856552l/22125258.jpg'
         }
       ]
     },
@@ -70,15 +70,15 @@ function bindMiddlewares(app){
       bookList: [
         {
           title: 'book1',
-          url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
+          url: 'https://d.gr-assets.com/books/1423586473l/24902492.jpg'
         },
         {
           title: 'book2',
-          url:'https://d.gr-assets.com/books/1449830757l/28172483.jpg'
+          url:'https://d.gr-assets.com/books/1435732050l/25829156.jpg'
         },
         {
           title: 'book3',
-          url: 'https://d.gr-assets.com/books/1388690343l/17160008.jpg'
+          url: 'https://d.gr-assets.com/books/1453189881l/12262741.jpg'
         }
       ]
     }
