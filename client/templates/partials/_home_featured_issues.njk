@@ -1,0 +1,22 @@
+<div class="features-issues-wrapper">
+  {%for issue in featuredIssues %}
+    <div class="featured-issue">
+      <h2 class="issue-title">
+        {{issue.title}}
+      </h2>
+      <div class="list-of-books">
+        {% for book in issue.bookList %}
+          <div class="book">
+            <div class="book-cover" style="background-image:url({{book.url}})">
+            </div>
+            <h3>
+              {{book.title}}
+            </h3>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="button see-more">
+        More books >>
+      </div>
+    </div>
+  {% endfor %}

@@ -1,32 +1,32 @@
-.nav-bar-wrapper {
+.nav-wrapper {
   position: fixed;
-  top: 0px;
+  top:0px;
+  background: white;
   display: flex;
-  width: 100%;
   justify-content: space-between;
-  background-color: $primary-colour;
+  width: 100%;
 
   .site-title {
-    color: $accent-colour;
+    order: 1;
+    margin-left: $medium-spacing;
+    margin-top: $small-spacing;
     text-align: left;
-    font-size: $medium-header-size;
-    font-family: $header-font;
-    margin-left: $small-spacing;
-    text-decoration: none;
+    color: $primary-colour;
   }
 
-  .nav-item-wrapper {
+
+  .nav-list {
+    order: 2;
+    margin-right: $medium-spacing;
     display: flex;
-    justify-content: flex-end;
-    margin-right: $small-spacing;
+    align-items: flex-end;
 
     .nav-item {
-      color: $secondary-colour;
       text-align: right;
-      align-self: flex-end;
-      font-size: $small-header-size;
-      margin-left: $small-spacing;
+      margin-left: $large-spacing;
       text-decoration: none;
+      font-size: $small-header-size;
+      color: $secondary-colour;
     }
 
   }

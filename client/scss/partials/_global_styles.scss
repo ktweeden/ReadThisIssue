@@ -1,44 +1,30 @@
 @import "_global_variables";
 
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.reading-column {
+  max-width: $max-column-width;
+}
 
 .page-title {
-  font-family: $header-font;
-  font-size: $large-header-size;
+  align-self: center;
   text-align: center;
-  color: $accent-colour;
-  width: 100%;
-  margin-top: ($large-spacing*2.5);
+  color: $primary-colour;
+  margin: $medium-spacing;
 }
 
 .button {
+  border: 1px solid $secondary-colour;
   padding: $small-spacing;
-  background-color: $accent-colour;
-  text-align: center;
-  color: $background-colour;
-  border: 0;
-  margin: $small-spacing 0;
-  text-decoration: none;
-}
-
-.small-button {
-  @extend .button;
-  font-size: $content-text-size;
-}
-
-.large-button {
-  @extend .button;
-  font-size: $small-header-size;
-}
-
-.input-box {
-  padding: $small-spacing;
-  background-color: $primary-colour;
   font-size: $small-header-size;
   color: $secondary-colour;
-  border: 0;
-  margin: $small-spacing;
+  text-align: center;
 }
-
 
 
 html, body {
@@ -49,4 +35,23 @@ html, body {
   height: 100%;
 
   font-family: $content-font;
+}
+
+h1,h2,h3 {
+  margin: 0;
+  padding: 0;
+  font-family: $header-font;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: $large-header-size;
+}
+
+h2 {
+  font-size: $medium-header-size;
+}
+
+h3 {
+  font-size: $small-header-size;
 }

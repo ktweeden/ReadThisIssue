@@ -24,12 +24,69 @@ function bindMiddlewares(app){
   app.use(bodyParser.urlencoded({ extended: false }));
 
   //Serve css files
-  app.use(express.static(path.join(__dirname, "../static/css")));
+  app.use('/css',express.static(path.join(__dirname, "../static/css")));
 
+
+  //Test featured issue object
+  featuredIssues = [
+    {
+      title:'Environment',
+      bookList: [
+        {
+          title: 'book1',
+          url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
+        },
+        {
+          title: 'book2',
+          url: 'https://d.gr-assets.com/books/1449830757l/28172483.jpg'
+        },
+        {
+          title: 'book3',
+          url:'https://d.gr-assets.com/books/1388690343l/17160008.jpg'
+        }
+      ]
+    },
+
+    {
+      title:'Social',
+      bookList: [
+        {
+          title: 'book1',
+          url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
+        },
+        {
+          title: 'book2',
+          url: 'https://d.gr-assets.com/books/1449830757l/28172483.jpg'
+        },
+        {
+          title: 'book3',
+          url: 'https://d.gr-assets.com/books/1388690343l/17160008.jpg'
+        }
+      ]
+    },
+
+    {
+      title:'Economic',
+      bookList: [
+        {
+          title: 'book1',
+          url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
+        },
+        {
+          title: 'book2',
+          url:'https://d.gr-assets.com/books/1449830757l/28172483.jpg'
+        },
+        {
+          title: 'book3',
+          url: 'https://d.gr-assets.com/books/1388690343l/17160008.jpg'
+        }
+      ]
+    }
+  ]
 
   //Home page request response
   app.get('/', function (req, res) {
-      res.render(path.join(__dirname, '../client/templates/home.njk'), {navigation:navigation});
+      res.render(path.join(__dirname, '../client/templates/home.njk'), {navigation:navigation, featuredIssues:featuredIssues});
   });
 
 

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  {%include "partials/_global_head.njk"%}
-  <link rel="stylesheet" href="/home.css">
-</head>
-<body>
-  <div class="wrapper">
-  {%include "partials/_nav_bar.njk"%}
-  </div>
-</body>
+<html>
+  <head>
+    <title>Read this issue</title>
+    <link rel="stylesheet" href="/css/home.css"/>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1 class="page-title">
+        Read This Issue
+      </h1>
+      {% include "partials/_home_featured_issues.njk" %}
+    </div>
+  </body>
 </html>

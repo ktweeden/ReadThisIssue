@@ -1,33 +1,28 @@
+.wrapper {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  height: 100%;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+
+.reading-column {
+  max-width: 800px; }
+
 .page-title {
-  font-family: "Roboto Condensed", sans-serif;
-  font-size: 3.5rem;
+  -ms-flex-item-align: center;
+      align-self: center;
   text-align: center;
   color: #0E7C7B;
-  width: 100%;
-  margin-top: 3.75rem; }
+  margin: 1rem; }
 
-.button, .small-button, .large-button {
+.button {
+  border: 1px solid #4F6D7A;
   padding: 0.5rem;
-  background-color: #0E7C7B;
-  text-align: center;
-  color: #DBE9EE;
-  border: 0;
-  margin: 0.5rem 0;
-  text-decoration: none; }
-
-.small-button {
-  font-size: 1.1rem; }
-
-.large-button {
-  font-size: 1.5rem; }
-
-.input-box {
-  padding: 0.5rem;
-  background-color: #C0D6DF;
   font-size: 1.5rem;
   color: #4F6D7A;
-  border: 0;
-  margin: 0.5rem; }
+  text-align: center; }
 
 html, body {
   margin: 0;
@@ -37,33 +32,110 @@ html, body {
   height: 100%;
   font-family: "Muli", sans-serif; }
 
-.nav-bar-wrapper {
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300; }
+
+h1 {
+  font-size: 3.5rem; }
+
+h2 {
+  font-size: 2.5rem; }
+
+h3 {
+  font-size: 1.5rem; }
+
+.nav-wrapper {
   position: fixed;
   top: 0px;
+  background: white;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  background-color: #C0D6DF; }
-  .nav-bar-wrapper .site-title {
-    color: #0E7C7B;
+  width: 100%; }
+  .nav-wrapper .site-title {
+    -ms-flex-order: 1;
+        order: 1;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
     text-align: left;
-    font-size: 2.5rem;
-    font-family: "Roboto Condensed", sans-serif;
-    margin-left: 0.5rem;
-    text-decoration: none; }
-  .nav-bar-wrapper .nav-item-wrapper {
+    color: #0E7C7B; }
+  .nav-wrapper .nav-list {
+    -ms-flex-order: 2;
+        order: 2;
+    margin-right: 1rem;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: end;
-        justify-content: flex-end;
-    margin-right: 0.5rem; }
-    .nav-bar-wrapper .nav-item-wrapper .nav-item {
-      color: #4F6D7A;
+    -ms-flex-align: end;
+        align-items: flex-end; }
+    .nav-wrapper .nav-list .nav-item {
       text-align: right;
-      -ms-flex-item-align: end;
-          align-self: flex-end;
+      margin-left: 1.5rem;
+      text-decoration: none;
       font-size: 1.5rem;
-      margin-left: 0.5rem;
-      text-decoration: none; }
+      color: #4F6D7A; }
+
+.features-issues-wrapper {
+  -ms-flex-order: 2;
+      order: 2;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 1rem; }
+  .features-issues-wrapper .featured-issue {
+    -ms-flex: 1;
+        flex: 1;
+    min-width: 30%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    margin: 0 1rem; }
+    .features-issues-wrapper .featured-issue .issue-title {
+      -ms-flex-order: 1;
+          order: 1;
+      width: 100%;
+      text-align: center;
+      color: #4F6D7A;
+      padding: 0.5rem 0;
+      border: 1px solid #4F6D7A; }
+    .features-issues-wrapper .featured-issue .list-of-books {
+      -ms-flex-order: 2;
+          order: 2;
+      -ms-flex: 1;
+          flex: 1;
+      -ms-flex-direction: column;
+          flex-direction: column;
+      margin-top: 1rem; }
+      .features-issues-wrapper .featured-issue .list-of-books .book {
+        width: 100%;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+            flex-direction: row;
+        margin: 1rem 0; }
+        .features-issues-wrapper .featured-issue .list-of-books .book .book-cover {
+          width: 30%;
+          height: 25vh;
+          background-repeat: no-repeat;
+          background-size: contain; }
+        .features-issues-wrapper .featured-issue .list-of-books .book h3 {
+          -ms-flex: 1;
+              flex: 1;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-direction: column;
+              flex-direction: column;
+          -ms-flex-line-pack: center;
+              align-content: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+          text-align: center; }
+    .features-issues-wrapper .featured-issue .see-more {
+      -ms-flex-order: 3;
+          order: 3;
+      font-weight: 300;
+      font-style: "Roboto Condensed", sans-serif; }
