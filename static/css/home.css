@@ -3,12 +3,11 @@
   display: flex;
   -ms-flex-align: center;
       align-items: center;
-  height: 100%;
   -ms-flex-direction: column;
       flex-direction: column; }
 
 .reading-column {
-  max-width: 800px; }
+  max-width: 900px; }
 
 .page-title {
   -ms-flex-item-align: center;
@@ -78,38 +77,40 @@ h3 {
       font-size: 1.5rem;
       color: #4F6D7A; }
 
-.features-issues-wrapper {
-  -ms-flex-order: 2;
-      order: 2;
+.featured-issues-wrapper {
+  -ms-flex-order: 1;
+      order: 1;
   width: 100%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -ms-flex-direction: row;
-      flex-direction: row; }
-  .features-issues-wrapper .featured-issue {
+      flex-direction: row;
+  height: 100vh; }
+  .featured-issues-wrapper .featured-issue {
     min-width: 50%;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-direction: column;
         flex-direction: column;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
-    .features-issues-wrapper .featured-issue.issue-1 {
+        flex-wrap: wrap;
+    height: 50vh; }
+    .featured-issues-wrapper .featured-issue.issue-1 {
       background-color: rgba(0, 23, 31, 0.7); }
-    .features-issues-wrapper .featured-issue.issue-2 {
+    .featured-issues-wrapper .featured-issue.issue-2 {
       background-color: rgba(0, 23, 31, 0.77); }
-    .features-issues-wrapper .featured-issue.issue-3 {
+    .featured-issues-wrapper .featured-issue.issue-3 {
       background-color: rgba(0, 23, 31, 0.8); }
-    .features-issues-wrapper .featured-issue .issue-title {
+    .featured-issues-wrapper .featured-issue .issue-title {
       -ms-flex-order: 1;
           order: 1;
       width: 100%;
       text-align: left;
       padding: 0.5rem 1rem;
       box-sizing: border-box; }
-    .features-issues-wrapper .featured-issue .list-of-books {
+    .featured-issues-wrapper .featured-issue .list-of-books {
       -ms-flex-order: 2;
           order: 2;
       -ms-flex-direction: row;
@@ -118,14 +119,14 @@ h3 {
       -ms-flex-wrap: nowrap;
           flex-wrap: nowrap;
       width: 100%; }
-      .features-issues-wrapper .featured-issue .list-of-books .book-cover {
+      .featured-issues-wrapper .featured-issue .list-of-books .book-cover {
         width: 30%;
-        height: 40vh;
+        height: 28vh;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
         display: inline-block; }
-      .features-issues-wrapper .featured-issue .list-of-books h3 {
+      .featured-issues-wrapper .featured-issue .list-of-books h3 {
         -ms-flex: 1;
             flex: 1;
         display: -ms-flexbox;
@@ -137,7 +138,7 @@ h3 {
         -ms-flex-pack: center;
             justify-content: center;
         text-align: center; }
-    .features-issues-wrapper .featured-issue .see-more {
+    .featured-issues-wrapper .featured-issue .see-more {
       -ms-flex-order: 3;
           order: 3;
       font-weight: 300;
@@ -145,14 +146,102 @@ h3 {
       font-size: 1.5rem;
       text-align: right;
       margin: 1rem; }
-  .features-issues-wrapper .title-box {
-    min-width: 50%;
+  .featured-issues-wrapper .title-box {
+    width: 50%;
     display: -ms-flexbox;
     display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
     background-color: rgba(0, 23, 31, 0.74);
     -ms-flex-pack: center;
         justify-content: center;
     -ms-flex-align: center;
-        align-items: center;
-    color: #003459;
-    font-size: 3.5rem; }
+        align-items: center; }
+    .featured-issues-wrapper .title-box h1 {
+      -ms-flex-order: 1;
+          order: 1; }
+    .featured-issues-wrapper .title-box .site-description {
+      -ms-flex-order: 2;
+          order: 2;
+      margin: 0.5rem;
+      text-align: center; }
+
+.cta-wrapper {
+  -ms-flex-order: 3;
+      order: 3;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: rgba(0, 23, 31, 0.2);
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
+  .cta-wrapper .cta-title {
+    -ms-flex-order: 1;
+        order: 1;
+    text-align: center;
+    width: 100%;
+    margin: 1.5rem; }
+  .cta-wrapper .cta-description {
+    -ms-flex-order: 2;
+        order: 2;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    max-width: 900px; }
+  .cta-wrapper .cta-blocks-wrapper {
+    -ms-flex-order: 3;
+        order: 3;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex; }
+    .cta-wrapper .cta-blocks-wrapper .cta {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: center;
+          justify-content: center;
+      -ms-flex-align: center;
+          align-items: center;
+      text-align: center;
+      width: 33.33%;
+      padding: 1.5rem 1.5rem;
+      box-sizing: border-box; }
+      .cta-wrapper .cta-blocks-wrapper .cta.submit-issue {
+        -ms-flex-order: 1;
+            order: 1;
+        background-color: rgba(0, 23, 31, 0.75); }
+      .cta-wrapper .cta-blocks-wrapper .cta.submit-book {
+        -ms-flex-order: 2;
+            order: 2;
+        background-color: rgba(0, 23, 31, 0.7); }
+      .cta-wrapper .cta-blocks-wrapper .cta.share {
+        -ms-flex-order: 3;
+            order: 3;
+        background-color: rgba(0, 23, 31, 0.65); }
+
+.info-block-wrapper {
+  -ms-flex-order: 2;
+      order: 2;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  background-color: rgba(0, 23, 31, 0.2); }
+  .info-block-wrapper .info-header {
+    width: 100%;
+    text-align: center;
+    margin: 1.5rem; }
+  .info-block-wrapper .info {
+    text-align: center;
+    max-width: 900px;
+    margin-bottom: 1.5rem; }

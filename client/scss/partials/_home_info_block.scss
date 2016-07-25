@@ -1,0 +1,21 @@
+.info-block-wrapper {
+  order: 2;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 23, 31, 0.2);
+
+  .info-header {
+    width: 100%;
+    text-align: center;
+    margin: $large-spacing;
+  }
+
+  .info {
+    text-align: center;
+    max-width: $max-column-width;
+    margin-bottom: $large-spacing;
+  }
+}

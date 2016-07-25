@@ -1,0 +1,55 @@
+.cta-wrapper {
+  order: 3;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-wrap: wrap;
+  background-color: rgba(0, 23, 31, 0.2);
+  justify-content: center;
+  align-items: center;
+
+  .cta-title {
+    order: 1;
+    text-align: center;
+    width: 100%;
+    margin: $large-spacing;
+  }
+  .cta-description {
+    order: 2;
+    text-align: center;
+    width: 100%;
+    margin-bottom: $large-spacing;
+    max-width: $max-column-width
+  }
+
+  .cta-blocks-wrapper {
+    order: 3;
+    width: 100%;
+    display: flex;
+
+    .cta {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 33.33%;
+      padding: $large-spacing $large-spacing;
+      box-sizing: border-box;
+
+      &.submit-issue {
+        order: 1;
+        background-color: rgba(0, 23, 31, 0.75);
+      }
+
+      &.submit-book {
+        order: 2;
+        background-color: rgba(0, 23, 31, 0.7);
+      }
+
+      &.share {
+        order: 3;
+        background-color: rgba(0, 23, 31, 0.65);
+      }
+    }
+  }
+}

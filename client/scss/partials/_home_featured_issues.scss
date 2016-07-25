@@ -1,15 +1,17 @@
-.features-issues-wrapper {
-  order: 2;
+.featured-issues-wrapper {
+  order: 1;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  height: 100vh;
 
   .featured-issue {
     min-width: 50%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    height: 50vh;
 
     &.issue-1 {
       background-color: rgba(0, 23, 31, 0.7);
@@ -40,7 +42,7 @@
 
         .book-cover {
           width: 30%;
-          height: 40vh;
+          height: 28vh;
           background-repeat: no-repeat;
           background-size: contain;
           background-position: center;
@@ -67,12 +69,22 @@
   }
 
   .title-box {
-    min-width: 50%;
+    width: 50%;
     display: flex;
+    flex-direction: column;
     background-color:rgba(0, 23, 31, 0.74);
     justify-content: center;
     align-items: center;
-    color: $primary-colour;
-    font-size: $large-header-size
+
+    h1 {
+      order: 1;
+    }
+
+    .site-description {
+      order: 2;
+      margin: $small-spacing;
+      text-align: center;
+    }
+
   }
 }
