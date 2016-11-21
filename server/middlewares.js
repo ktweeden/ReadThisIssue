@@ -27,87 +27,42 @@ function bindMiddlewares(app){
   app.use('/css',express.static(path.join(__dirname, "../static/css")));
 
 
-  //Test featured issue object
-  featuredIssues = [
-    {
-      title:'Environment',
-      bookList: [
-        {
-          title: 'The sixth extinction',
-          url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
-        },
-        {
-          title: 'book2',
-          url: 'https://d.gr-assets.com/books/1391384454l/18079683.jpg'
-        },
-        {
-          title: 'book3',
-          url:'https://d.gr-assets.com/books/1388690343l/17160008.jpg'
-        }
-      ]
-    },
-
-    {
-      title:'Social',
-      bookList: [
-        {
-          title: 'book1',
-          url: 'https://d.gr-assets.com/books/1356654499l/15796700.jpg'
-        },
-        {
-          title: 'book2',
-          url: 'https://d.gr-assets.com/books/1439328100l/25489025.jpg'
-        },
-        {
-          title: 'book3',
-          url: 'https://d.gr-assets.com/books/1400856552l/22125258.jpg'
-        }
-      ]
-    },
-
-    {
-      title:'Economic',
-      bookList: [
-        {
-          title: 'book1',
-          url: 'https://d.gr-assets.com/books/1423586473l/24902492.jpg'
-        },
-        {
-          title: 'book2',
-          url:'https://d.gr-assets.com/books/1435732050l/25829156.jpg'
-        },
-        {
-          title: 'book3',
-          url: 'https://d.gr-assets.com/books/1453189881l/12262741.jpg'
-        }
-      ]
-    }
-  ]
-
   //Home page request response
   app.get('/', function (req, res) {
-      res.render(path.join(__dirname, '../client/templates/home.njk'), {navigation:navigation, featuredIssues:featuredIssues});
+      res.render(path.join(__dirname, '../client/templates/home.njk'), {
+        navigation:navigation,
+        featuredIssues:featuredIssues
+      });
   });
 
 
   //Add book page request response
   app.get('/add/book', function (req, res) {
     if (!req.query.search) {
-      res.render(path.join(__dirname, '../client/templates/addBook.njk'), {navigation:navigation});
+      res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
+        navigation:navigation
+      });
     }
     else {
       var searchTerm = req.query.search;
       goodreads.searchGoodreads(searchTerm, function(error, listOfWorks){
-        res.render(path.join(__dirname, '../client/templates/addBook.njk'), {navigation:navigation, listOfWorks:listOfWorks});
+        res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
+          navigation:navigation,
+          listOfWorks:listOfWorks
+        });
       });
     }
   });
 
-  //Add book details page
+  //Book details page
   app.get('/add/book/:workID', function(req, res) {
     goodreads.getBookByGoodreadsID(req.params.workID, function(error, book){
       issue.Issue.find({}, function(error, docs){
-        res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {navigation:navigation, book:book, listOfIssues:docs});
+        res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {
+          navigation:navigation,
+          book:book,
+          listOfIssues:docs
+        });
       });
     });
   });
@@ -123,12 +78,16 @@ function bindMiddlewares(app){
       console.log(req.body.title);
       if (issueExists) {
         console.log('this issue already exists');
-        return res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {navigation:navigation});
+        return res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {
+          navigation:navigation
+        });
       }
       issue.addToDb(req.body, function (error, newIssue){
         issue.Issue.find({}, function(error, docs){
           console.log(docs);
-          res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {navigation:navigation});
+          res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {
+            navigation:navigation
+          });
         });
       });
     });
@@ -141,7 +100,9 @@ function bindMiddlewares(app){
       if(bookExists) {
         //TODO check if the issue being submitted is attached to existing book.
         console.log('this book exists - write a function to check if issue exists');
-        return res.render(path.join(__dirname, '../client/templates/addBook.njk'), {navigation:navigation});
+        return res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
+          navigation:navigation
+        });
       }
       //If book isn't already in the database, retrieve info from goodreads
       goodreads.getBookByGoodreadsID(req.body.bookID, function(error, bookObject){
@@ -170,8 +131,68 @@ function bindMiddlewares(app){
       });
     });
   });
-
 };
+
+/*
+ * Dummy data for featured books and navigation
+ */
+
+//Test featured issue object
+var featuredIssues = [
+  {
+    title:'Environment',
+    bookList: [
+      {
+        title: 'The sixth extinction',
+        url: 'https://d.gr-assets.com/books/1372677697l/17910054.jpg'
+      },
+      {
+        title: 'book2',
+        url: 'https://d.gr-assets.com/books/1391384454l/18079683.jpg'
+      },
+      {
+        title: 'book3',
+        url:'https://d.gr-assets.com/books/1388690343l/17160008.jpg'
+      }
+    ]
+  },
+
+  {
+    title:'Social',
+    bookList: [
+      {
+        title: 'book1',
+        url: 'https://d.gr-assets.com/books/1356654499l/15796700.jpg'
+      },
+      {
+        title: 'book2',
+        url: 'https://d.gr-assets.com/books/1439328100l/25489025.jpg'
+      },
+      {
+        title: 'book3',
+        url: 'https://d.gr-assets.com/books/1400856552l/22125258.jpg'
+      }
+    ]
+  },
+
+  {
+    title:'Economic',
+    bookList: [
+      {
+        title: 'book1',
+        url: 'https://d.gr-assets.com/books/1423586473l/24902492.jpg'
+      },
+      {
+        title: 'book2',
+        url:'https://d.gr-assets.com/books/1435732050l/25829156.jpg'
+      },
+      {
+        title: 'book3',
+        url: 'https://d.gr-assets.com/books/1453189881l/12262741.jpg'
+      }
+    ]
+  }
+]
 
 //Nav object
 var navigation = [

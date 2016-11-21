@@ -4,7 +4,7 @@
   "description": "Recommends books that will inform you about a particular issue or atrocity",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-express-server": "^0.5.3",
     "grunt-postcss": "^0.8.0",
+    "jest": "^17.0.3",
     "request": "^2.73.0"
   }
 }

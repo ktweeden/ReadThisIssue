@@ -1,6 +1,6 @@
 
 /**
- * Tests input contains only valid characters TODO move to input utils file
+ * Tests input contains only valid characters
  */
 var inputValidation = function(input) {
   return /^[a-z\d\s?!"',.()£#$:;-]+$/i.test(input);

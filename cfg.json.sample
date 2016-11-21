@@ -1,5 +1,5 @@
 {
-  "DATABASE_URI" : "mongodb://<user_name>:<user_password>@ds027505.mlab.com:27505/<app_name>",
+  "DATABASE_URI" : "mongodb://<user_name>:<user_password>@<db_host>:<port>/<app_name>",
   "DATBASE_USER_NAME" : "",
   "DATABASE_USER_PASSWORD" : "",
   "GOODREADS_KEY" : "",
