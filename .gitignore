@@ -3,3 +3,4 @@ cfg.json
 .sass-cache/
 sampleSearchResponse.json
 sampleBookByIDResult.json
+coverage/
