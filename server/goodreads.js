@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var xml2js = require('xml2js');
 var cfg = require('../cfg.json');
 var request = require('request');
-var inputValidation = require('./utils/input_validation');
+var inputSanitation = require('./utils/input_sanitation');
 
 var error = {};
 
@@ -11,7 +11,7 @@ var error = {};
  */
 var searchGoodreads = function (bookIdentifyer, onFound) {
 
-   if (!inputValidation.inputValidation(bookIdentifyer)) {
+   if (!inputSanitation.inputSanitation(bookIdentifyer)) {
      error.message ="Your search must contain letters a-z, numbers 1-0 and the characters - . , ! ?";
      //TODO push error message to page
    }

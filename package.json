@@ -4,7 +4,7 @@
   "description": "Recommends books that will inform you about a particular issue or atrocity",
   "main": "main.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
