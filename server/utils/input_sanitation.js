@@ -2,7 +2,7 @@
 /**
  * Tests input contains only valid characters
  */
-var inputSanitation = function(input) {
+const inputSanitation = function(input) {
   return /^[a-z\d\s?!"',.()£#$:;-]*$/i.test(input);
 }
 
