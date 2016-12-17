@@ -1,69 +1,67 @@
-var mongoose = require('mongoose');
-var xml2js = require('xml2js');
-var cfg = require('../cfg.json');
-var request = require('request');
-var inputSanitation = require('./utils/input_sanitation');
+const mongoose = require('mongoose')
+const xml2js = require('xml2js')
+const cfg = require('../cfg.json')
+const request = require('request-promise') //TODO install request-promise
+const inputSanitation = require('./utils/input_sanitation')
 
-var error = {};
+
+function parseXmlPromise(xml){
+  return new Promise((resolve, reject) => {
+    xml2js.parseString(xml, function (error, parsed){
+      if (!!error){
+        return reject(error)
+      }
+      resolve(parsed)
+    })
+  })
+}
 
 /**
  * Searches goodreads database for a book given title or ISBN. Passes array of works found to callback.
  */
-var searchGoodreads = function (bookIdentifyer, onFound) {
+const searchGoodreads = function (bookIdentifyer, onFound) {
 
    if (!inputSanitation.inputSanitation(bookIdentifyer)) {
-     error.message ="Your search must contain letters a-z, numbers 1-0 and the characters - . , ! ?";
+     throw new Error("Your search must contain letters a-z, numbers 1-0 and the characters - . , ! ?")
      //TODO push error message to page
    }
-   else {
-     var book = encodeURIComponent(bookIdentifyer);
-     var searchUrl = "https://www.goodreads.com/search/index.xml?key=" + cfg.GOODREADS_KEY + "&q=" + book;
-     //console.log(searchUrl);
 
-     //Send query to goodreads
-     request.get(searchUrl, function (error, response, body){
-       if (!!error) {
-         return onFound(error);
+   const book = encodeURIComponent(bookIdentifyer)
+   const searchUrl = `https://www.goodreads.com/search/index.xml?key=${cfg.GOODREADS_KEY}&q=${book}`
+
+   //Send query to goodreads
+   request.get(searchUrl)
+   .then(body => {
+     //parse goodreads xml search result to JSON string
+     xml2js.parseString(body, function (error, parsed){
+       if (!!error){
+         return onFound(error)
        }
-
-       //parse goodreads xml search result to JSON string
-       xml2js.parseString(body, function (error, parsed){
-         if (!!error){
-           return onFound(error);
-         }
-
-         //check if there are any results matching search
-         else if (parsed.GoodreadsResponse.search[0]['total-results'][0] === '0') {
-           return onFound(null, []);
-        }
-         //create new, cleaner string of relevant result info and pass to callback
-         onFound(null, parseWorks(parsed.GoodreadsResponse.search[0].results[0].work));
-       });
-     });
-   }
+       //check if there are any results matching search
+       if (parsed.GoodreadsResponse.search[0]['total-results'][0] === '0') {
+         return onFound(null, [])
+       }
+       //create new, cleaner string of relevant result info and pass to callback
+       onFound(null, parseWorks(parsed.GoodreadsResponse.search[0].results[0].work))
+     })
+   })
+   .catch(onFound)
 }
 
 /*
  * Returns book info from Goodreads given Goodreads ID
  */
-var getBookByGoodreadsID = function (goodreadsBookId, onFound) {
-  var searchUrl = "https://www.goodreads.com/book/show/" + goodreadsBookId + ".xml?key=" + cfg.GOODREADS_KEY;
-  //console.log("getBookByGoodreadsID.searchUrl="+searchUrl);
+function getBookByGoodreadsID(goodreadsBookId, onFound) {
+  const searchUrl = `https://www.goodreads.com/book/show/${goodreadsBookId}.xml?key=${cfg.GOODREADS_KEY}`
 
   //send query to goodreads
-  request.get(searchUrl, function (error, response, body){
-    if (!!error) {
-      return onFound(error);
-    }
-    //parse goodreads xml search result to JSON string
-    xml2js.parseString(body, function (error, parsed){
-      if (!!error){
-        return onFound(error);
-      }
-    onFound(null, parseBook(parsed));
-    });
-  });
+  request.get(searchUrl)
+  .then(parseXmlPromise)
+  .then(parseBook)
+  .then(parsed => onFound(null, parsed))
+  .catch(onFound)
 }
+
 
 /**
  * Create cleaned up array of 'work' objects from goodreads search response xml

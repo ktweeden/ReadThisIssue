@@ -13,7 +13,7 @@ const Issue = mongoose.model('Issue', issueSchema);
  * Searches by title whether issue and returns boolean
  */
 const checkIssueExists = function(issueTitle, onCheck) {
-  Issue.find({title:issueTitle}
+  Issue.find({title:issueTitle})
   .then(docs => onCheck(null, !!docs.length))
   .catch(onCheck)
 }
