@@ -28,18 +28,19 @@ const Book = mongoose.model('Book', bookSchema)
 /**
  * Searches by ID whether book exists in db, and returns boolean
  */
-const checkBookExists = function(goodreadsId, onCheck) {
-  Book.find({goodreadsId:goodreadsId})
-  .then(docs => onCheck(null, !!docs.length))
-  .catch(onCheck)
+function checkBookExists(goodreadsId) {
+  return (
+    Book.find({goodreadsId:goodreadsId})
+    .then(docs => !!docs.length)
+  )
 }
 
 
 /**
  * Adds book to the database.
  */
-const addBookToDb = function (bookObject, onSave) {
-  const book = new Book({
+function addBookToDb(bookObject) {
+  return new Book({
     title: bookObject.title,
     author:bookObject.author,
     publicationYear: bookObject.publicationYear,
@@ -50,11 +51,7 @@ const addBookToDb = function (bookObject, onSave) {
     goodreadsURL: bookObject.goodreadsURL,
     issues: bookObject.issues,
     goodreadsId: bookObject.bookID
-  });
-
-  book.save()
-  .then(book => onSave(null, book))
-  .catch(onSave)
+  }).save()
 }
 
 module.exports = {

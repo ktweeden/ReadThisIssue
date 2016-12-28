@@ -2,8 +2,8 @@
 /**
  * Tests input contains only valid characters
  */
-const inputSanitation = function(input) {
-  return /^[a-z\d\s?!"',.()£#$:;-]*$/i.test(input);
+function inputSanitation(input) {
+  return /^[a-z\d\s?!"',.()£#$:;-]*$/i.test(input)
 }
 
 

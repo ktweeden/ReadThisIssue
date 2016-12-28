@@ -19,44 +19,42 @@ function parseXmlPromise(xml){
 /**
  * Searches goodreads database for a book given title or ISBN. Passes array of works found to callback.
  */
-const searchGoodreads = function (bookIdentifyer, onFound) {
+function searchGoodreads(bookIdentifyer) {
 
    if (!inputSanitation.inputSanitation(bookIdentifyer)) {
-     throw new Error("Your search must contain letters a-z, numbers 1-0 and the characters - . , ! ?")
-     //TODO push error message to page
+     return Promise.reject(new Error("Your search must contain letters a-z, numbers 1-0 and the characters - . , ! ?"))
    }
 
    const book = encodeURIComponent(bookIdentifyer)
    const searchUrl = `https://www.goodreads.com/search/index.xml?key=${cfg.GOODREADS_KEY}&q=${book}`
 
    //Send query to goodreads
-   request.get(searchUrl)
+   return (request.get(searchUrl)
    .then(parseXmlPromise)
    .then(parsed => {
      //check if there are any results matching search
      if (parsed.GoodreadsResponse.search[0]['total-results'][0] === '0') {
-       return onFound(null, [])
+       return []
      }
      //create new, cleaner string of relevant result info and pass to callback
-     onFound(null, parseWorks(parsed.GoodreadsResponse.search[0].results[0].work))
-   })
-   .catch(onFound)
+     return parseWorks(parsed.GoodreadsResponse.search[0].results[0].work)
+   }))
 }
 
 
 /*
  * Returns book info from Goodreads given Goodreads ID
  */
-function getBookByGoodreadsID(goodreadsBookId, onFound) {
+function getBookByGoodreadsID(goodreadsBookId) {
   const searchUrl = `https://www.goodreads.com/book/show/${goodreadsBookId}.xml?key=${cfg.GOODREADS_KEY}`
 
-  //send query to goodreads
-  request.get(searchUrl)
-  .then(parseXmlPromise)
-  .then(parseBook)
-  .then(parsed => onFound(null, parsed))
-  .catch(onFound)
+  return (
+    request.get(searchUrl)
+    .then(parseXmlPromise)
+    .then(parseBook)
+  )
 }
+
 
 
 /**

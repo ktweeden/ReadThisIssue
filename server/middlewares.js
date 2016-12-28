@@ -1,17 +1,17 @@
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var xml2js = require('xml2js');
-var request = require('request');
-var express = require('express');
-var path = require('path');
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+const xml2js = require('xml2js')
+const request = require('request')
+const express = require('express')
+const path = require('path')
 
 //local modules
-var cfg = require('../cfg.json');
-var db = require('./db');
-var goodreads = require('./goodreads');
-var schema = require('./schemas.js');
-var issue = require('./issue.js');
-var book = require('./book.js');
+const cfg = require('../cfg.json')
+const db = require('./db')
+const goodreads = require('./goodreads')
+const schema = require('./schemas.js')
+const issue = require('./issue.js')
+const book = require('./book.js')
 
 
 /**
@@ -20,125 +20,134 @@ var book = require('./book.js');
 function bindMiddlewares(app){
 
   //body parser config
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({ extended: false }))
 
   //Serve css files
-  app.use('/css',express.static(path.join(__dirname, "../static/css")));
+  app.use('/css',express.static(path.join(__dirname, "../static/css")))
 
 
   //Home page request response
-  app.get('/', function (req, res) {
-      res.render(path.join(__dirname, '../client/templates/home.njk'), {
-        navigation:navigation,
-        featuredIssues:featuredIssues
-      });
-  });
+  app.get('/', (req, res) => {
+    res.render(path.join(__dirname, '../client/templates/home.njk'), {
+      navigation: navigation,
+      featuredIssues: featuredIssues
+    })
+  })
 
 
   //Add book page request response
-  app.get('/add/book', function (req, res) {
+  app.get('/add/book', (req, res) => {
     if (!req.query.search) {
-      res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
+      return res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
         navigation:navigation
-      });
+      })
     }
-    else {
-      var searchTerm = req.query.search;
-      goodreads.searchGoodreads(searchTerm, function(error, listOfWorks){
-        res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
-          navigation:navigation,
-          listOfWorks:listOfWorks
-        });
-      });
-    }
-  });
+    goodreads.searchGoodreads(req.query.search)
+    .then(listOfWorks => {
+      res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
+        navigation: navigation,
+        listOfWorks: listOfWorks
+      })
+    })
+    .catch(error => {
+      res.send("ERROR!")
+    })
+  })
+
 
   //Book details page
-  app.get('/add/book/:workID', function(req, res) {
-    goodreads.getBookByGoodreadsID(req.params.workID, function(error, book){
-      issue.Issue.find({}, function(error, docs){
+  app.get('/add/book/:workID', (req, res) => {
+    goodreads.getBookByGoodreadsID(req.params.workID)
+    .then(book => {
+      issue.Issue.find({})
+      .then(docs => {
         res.render(path.join(__dirname, '../client/templates/addBookDetails.njk'), {
           navigation:navigation,
           book:book,
           listOfIssues:docs
-        });
-      });
-    });
-  });
+        })
+      })
+      .catch(error => res.send("ERROR!"))
+    })
+    .catch(error => res.send("ERROR!"))
+  })
 
   //Get page for issue submision
-  app.get('/add/issue', function(req, res){
-    res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {navigation:navigation});
-  });
+  app.get('/add/issue', (req, res) => {
+    res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {navigation:navigation})
+  })
 
   // Add submitted issue to database
-  app.post('/add/issue', function(req, res) {
-    issue.checkExists(req.body.title, function(error, issueExists){
-      console.log(req.body.title);
+  app.post('/add/issue', (req, res) => {
+    issue.checkExists(req.body.title)
+    .then(issueExists => {
       if (issueExists) {
-        console.log('this issue already exists');
         return res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {
           navigation:navigation
-        });
+        })
       }
-      issue.addToDb(req.body, function (error, newIssue){
-        issue.Issue.find({}, function(error, docs){
-          console.log(docs);
-          res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {
+      else {
+        return (
+          issue.addToDb(req.body)
+          .then(newIssue => res.render(path.join(__dirname, '../client/templates/addIssue.njk'), {
             navigation:navigation
-          });
-        });
-      });
-    });
-  });
+          }))
+        )
+      }
+    })
+    .catch(error => res.send("ERROR!"))
+  })
 
   //Add submitted book to database
   app.post('/add/book/:bookID', function(req, res) {
-    console.log('this is the req.body', req.body);
-    book.checkExists(req.body.bookID, function(error, bookExists){
+    console.log('this is the req.body', req.body)
+    book.checkExists(req.body.bookID)
+    .then(bookExists => {
       if(bookExists) {
         //TODO check if the issue being submitted is attached to existing book.
-        console.log('this book exists - write a function to check if issue exists');
+        console.log('this book exists - write a function to check if issue exists')
         return res.render(path.join(__dirname, '../client/templates/addBook.njk'), {
           navigation:navigation
-        });
+        })
       }
-      //If book isn't already in the database, retrieve info from goodreads
-      goodreads.getBookByGoodreadsID(req.body.bookID, function(error, bookObject){
-
-        //Creates object to be added to Book's 'issues' field
-        issue.Issue.findById(req.body._id, function(error, issue){
-          console.log('the book is ' + bookObject);
-          var newIssue = {
+      else{
+        //If book isn't already in the database, retrieve info from goodreads
+        goodreads.getBookByGoodreadsID(req.body.bookID)
+        .then(bookObject => {
+          //Creates object to be added to Book's 'issues' field
+          return issue.Issue.findById(req.body._id).then(issue => ({
+            bookObject, issue
+          }))
+        })
+        .then({ bookObject, issue } => {
+          const newIssue = {
             title: issue.title,
             description: req.body.description,
             issueID: issue._id
-          };
+          }
           if (bookObject.issues === undefined) {
-            bookObject.issues = [newIssue];
+            bookObject.issues = []
           }
-          else {
-            bookObject.issues.push(newIssue);
-          }
+          bookObject.issues.push(newIssue)
+          return bookObject
+        })
+        .then(book.addToDb)
+        .then(book => {
+          return res.redirect('/')
+        })
+        .catch(error => res.send("ERROR!"))
+      }
+    })
+  })
 
-          //adds new book, including issue and description, to database
-          book.addToDb(bookObject, function(error, book){
-            console.log(JSON.stringify(book) + ' has been added to the database');
-            return res.redirect('/');
-          });
-        });
-      });
-    });
-  });
-};
 
 /*
  * Dummy data for featured books and navigation
  */
 
 //Test featured issue object
-var featuredIssues = [
+const featuredIssues = [
   {
     title:'Environment',
     bookList: [
@@ -195,7 +204,7 @@ var featuredIssues = [
 ]
 
 //Nav object
-var navigation = [
+const navigation = [
   {
     title: 'Home',
     URL: '/'
@@ -208,7 +217,7 @@ var navigation = [
     title: 'Add issue',
     URL: '/add/issue'
   }
-];
+]
 
 module.exports = {
   bind:bindMiddlewares
