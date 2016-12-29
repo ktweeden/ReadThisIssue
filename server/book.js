@@ -20,7 +20,7 @@ const bookSchema = mongoose.Schema({
     approved: {type: Boolean, default: false}
   }]
 
-});
+})
 
 const Book = mongoose.model('Book', bookSchema)
 

@@ -69,7 +69,8 @@ function parseWorks(arrayOfWorks) {
     title: work.best_book[0].title[0],
     author: work.best_book[0].author[0].name[0],
     cover: work.best_book[0].image_url[0]
-  })
+    })
+  )
 }
 
 /**

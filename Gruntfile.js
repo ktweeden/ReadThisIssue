@@ -66,7 +66,7 @@ module.exports = function(grunt) {
     }
 
 
-  });
+  })
 
   grunt.registerTask('default', ['watch:css']);
   grunt.registerTask('server', ['watch:express']);

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const xml2js = require('xml2js')
-const request = require('request')
 const express = require('express')
 const path = require('path')
 
@@ -13,6 +12,12 @@ const schema = require('./schemas.js')
 const issue = require('./issue.js')
 const book = require('./book.js')
 
+function createErrorHandler(res) {
+  return function (error) {
+    console.error(error)
+    res.render(path.join(__dirname, '..client/templates/404.njk'))
+  }
+}
 
 /**
  * All http request handlers - export function that takes app and binds middlewares to it
@@ -50,9 +55,7 @@ function bindMiddlewares(app){
         listOfWorks: listOfWorks
       })
     })
-    .catch(error => {
-      res.send("ERROR!")
-    })
+    .catch(createErrorHandler(res))
   })
 
 
@@ -68,9 +71,9 @@ function bindMiddlewares(app){
           listOfIssues:docs
         })
       })
-      .catch(error => res.send("ERROR!"))
+      .catch(createErrorHandler(res))
     })
-    .catch(error => res.send("ERROR!"))
+    .catch(createErrorHandler(res))
   })
 
   //Get page for issue submision
@@ -96,7 +99,7 @@ function bindMiddlewares(app){
         )
       }
     })
-    .catch(error => res.send("ERROR!"))
+    .catch(createErrorHandler(res))
   })
 
   //Add submitted book to database
@@ -120,7 +123,7 @@ function bindMiddlewares(app){
             bookObject, issue
           }))
         })
-        .then({ bookObject, issue } => {
+        .then(({ bookObject, issue }) => {
           const newIssue = {
             title: issue.title,
             description: req.body.description,
@@ -136,11 +139,11 @@ function bindMiddlewares(app){
         .then(book => {
           return res.redirect('/')
         })
-        .catch(error => res.send("ERROR!"))
+        .catch(createErrorHandler(res))
       }
     })
   })
-
+}
 
 /*
  * Dummy data for featured books and navigation
